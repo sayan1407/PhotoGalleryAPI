@@ -13,5 +13,6 @@ namespace PhotoGallery.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<PhotoUserAssoc> PhotoUserAssoc { get; set; }
+        public DbSet<Comments> Comments { get; set; }
     }
 }

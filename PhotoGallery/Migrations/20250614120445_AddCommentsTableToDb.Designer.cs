@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotoGallery.Data;
 
@@ -11,9 +12,11 @@ using PhotoGallery.Data;
 namespace PhotoGallery.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250614120445_AddCommentsTableToDb")]
+    partial class AddCommentsTableToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,16 +269,11 @@ namespace PhotoGallery.Migrations
                     b.Property<int>("Like")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("fileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Photos");
                 });
@@ -373,15 +371,6 @@ namespace PhotoGallery.Migrations
                         .IsRequired();
 
                     b.Navigation("Photo");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PhotoGallery.Model.Photo", b =>
-                {
-                    b.HasOne("PhotoGallery.Model.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
 
                     b.Navigation("User");
                 });
